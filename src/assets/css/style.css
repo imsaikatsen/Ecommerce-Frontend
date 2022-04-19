@@ -1,0 +1,12 @@
+body {font-family: Arial, Helvetica, sans-serif;}
+.custom-label{
+  float: left;
+}
+.custom-img{
+  border-radius: 50%;
+  width: 300px;
+}
+
+.custom-btn{
+  float: right;
+}
