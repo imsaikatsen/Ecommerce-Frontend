@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import axios from "axios";
 
+
 const store = createStore({
 
   state: {
@@ -16,11 +17,32 @@ const store = createStore({
     getError: state => state.error
   },
   actions: {
-    login({ commit }, user) {
+    async login({commit}, user) {
+      // const rawResponse = fetch('http://localhost:8000/api/auth/login', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Accept': 'application/json',
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({'email': 'sensaikat@gmail.com', 'password': '123456'}) 
+      // });
+      // const content = rawResponse.json();
+
+      // console.log(content);
+
+
       return new Promise((resolve, reject) => {
         commit('auth_request')
-        axios({ url: 'login', data: user, method: 'POST' })
+        // const headers = {
+        //   'Content' : 'application/json',
+        //   'Accept' : 'application/json',
+        // }
+        // axios.post('login', {email: user.email, password: user.password })
+        axios({
+          url: 'login', data: {email: user.email, password: user.password }, method: 'POST'
+        })
           .then(resp => {
+            console.log(resp)
             const token = 'Bearer ' + resp.data.access_token
             const user = resp.data.user
             localStorage.setItem('token', token)

@@ -2,12 +2,13 @@
   <div class="container">
     <div class="row">
       <h3>Please Login first !!</h3>
+      <div class="col-md-4"></div>
       <div class="col-md-4">
-      </div>
-      <div class="col-md-4">
-        <form v-on:submit.prevent="submitForm">
+        <form method="post" v-on:submit.prevent="submitForm">
           <div class="mb-3 mt-5">
-            <label for="exampleInputEmail1" class="form-label custom-label">Email</label>
+            <label for="exampleInputEmail1" class="form-label custom-label"
+              >Email</label
+            >
             <input
               type="email"
               class="form-control"
@@ -29,12 +30,12 @@
               id="exampleInputPassword1"
             />
           </div>
-          <button type="submit" class="btn btn-primary custom-btn">Log In</button>
+          <button type="submit" class="btn btn-primary custom-btn">
+            Log In
+          </button>
         </form>
       </div>
-      <div class="col-md-4">
-
-      </div>
+      <div class="col-md-4"></div>
     </div>
   </div>
 </template>
@@ -43,22 +44,25 @@
 import { mapActions } from 'vuex'
 export default {
   name: "LoginComp",
-  data(){
-    return{
+  data() {
+    return {
       form: {
         email: "",
-        password: ""
-      }
-    }
+        password: "",
+      },
+      showError:false,
+    };
   },
   methods: {
     ...mapActions(["login"]),
+
     submitForm: function(){
-      this.$store.dispatch('login',this.form)
+      this.$store.dispatch('login', this.form)
       .then(() => this.$router.push('/dashboard'))
       .catch(err => console.log(err))
     }
-  }
+
+  },
 };
 </script>
 
