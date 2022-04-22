@@ -1,29 +1,25 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link>
-  </nav>
-  <router-view/>
+<div class="container-fluid">
+    <div class="row">
+       <TopbarComp />
+       <div class="col-md-4 custom-sidebar-padding"> 
+         <SidebarComp />
+       </div>
+       <div class="col-md-8"> 
+           <router-view/>
+       </div>
+    </div>
+  </div>
+  
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import TopbarComp from '@/components/TopbarComp.vue'
+import SidebarComp from '@/components/SidebarComp.vue'
+export default {
+  components: {
+    TopbarComp,
+    SidebarComp
+  }
 }
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+</script>
