@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <ProductComp />
+    <ProductListComp />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import ProductComp from '@/components/ProductComp.vue'
+import ProductListComp from '@/components/products/ProductListComp'
 
 export default {
   name: 'LoginView',
   components: {
-    ProductComp
+    ProductListComp
   }
 }
 </script>

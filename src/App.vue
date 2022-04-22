@@ -2,10 +2,10 @@
 <div class="container-fluid">
     <div class="row">
        <TopbarComp />
-       <div class="col-md-4 custom-sidebar-padding"> 
+       <div class="col-md-2 custom-sidebar-padding"> 
          <SidebarComp />
        </div>
-       <div class="col-md-8"> 
+       <div class="col-md-10"> 
            <router-view/>
        </div>
     </div>
