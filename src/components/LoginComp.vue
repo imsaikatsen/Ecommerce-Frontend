@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <h3>Please Login first !!</h3>
+      <h3 class="text-center mt-3">Please Login first !!</h3>
       <div class="col-md-4"></div>
       <div class="col-md-4">
         <form method="post" v-on:submit.prevent="submitForm">
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapMutations , mapGetters  } from 'vuex'
 export default {
   name: "LoginComp",
   data() {
@@ -54,15 +54,34 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["login"]),
-
-    submitForm: function(){
-      this.$store.dispatch('login', this.form)
-      .then(() => this.$router.push('/dashboard'))
-      .catch(err => console.log(err))
-    }
+     ...mapMutations(["setUser", "setToken"]),
+   async submitForm(e){
+     e.preventDefault();
+       const response = await fetch("http://127.0.0.1:8000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: this.form.email,
+          password: this.form.password,
+        }),
+      });
+      console.log(response);
+      const { user, access_token }= await response.json();
+      this.setUser(user);
+      this.setToken(access_token);
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', access_token);
+      this.$router.push("/dashboard");
+      
+   },
+    computed: {
+    ...mapGetters(["isLoggedIn"])
+  }
 
   },
+  
 };
 </script>
 

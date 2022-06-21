@@ -25,7 +25,7 @@
               <li><a class="dropdown-item" href="#">Action</a></li>
               <li><a class="dropdown-item" href="#">Another action</a></li>
               <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" @click="logOut()">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -34,3 +34,17 @@
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  methods: {
+    logOut() {
+      this.$store.state.user = null;
+      this.$store.state.token = null;
+      localStorage.setItem('token', null);
+      localStorage.setItem('user', null);
+      this.$router.push('/');
+    }
+  }
+}
+</script>
